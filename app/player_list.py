@@ -84,6 +84,20 @@ class PlayerList:
             node_before.next_node = node_after
             node_after.prev_node = node_before
 
+    def display(self, forward : bool= True) -> list[dict[str, str]]:
+        player_nodes = []
+        if forward:
+            current_node = self._head
+            while current_node:
+                player_nodes.append({"uid": current_node.key, "name": current_node.player.name})
+                current_node = current_node.next_node
+        else:
+            current_node = self._tail
+            while current_node:
+                player_nodes.append({"uid": current_node.key, "name": current_node.player.name})
+                current_node = current_node.prev_node
+        return player_nodes
+
     def _get_player_node_by_key(self, key) -> PlayerNode | None:
         current_node = self._head
         while current_node:
