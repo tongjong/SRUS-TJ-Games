@@ -18,7 +18,7 @@ class PlayerList:
     def tail(self):
         return self._tail
 
-    def add_at_head(self, player_node) -> None:
+    def add_at_head(self, player_node : PlayerNode) -> None:
         if self._is_empty():
             self._head = player_node
         else:
@@ -29,7 +29,7 @@ class PlayerList:
                 self._tail = self._head
             self._head = player_node
 
-    def add_at_tail(self, player_node) -> None:
+    def add_at_tail(self, player_node : PlayerNode) -> None:
         if self._is_empty():
             self._tail = player_node
         else:
@@ -74,7 +74,7 @@ class PlayerList:
             self._tail = new_tail
 
     def remove_node_by_key(self, key: str) -> None:
-        player_node = self._get_player_node_by_key(key)
+        player_node = self.get_player_node_by_key(key)
         if self._head is player_node:
             self.remove_at_head()
         elif self._tail is player_node:
@@ -96,14 +96,38 @@ class PlayerList:
             else:
                 return self._display_backward()
 
-    def _get_player_node_by_key(self, key) -> PlayerNode | None:
-        current_node = self._head
-        while current_node:
-            if key == current_node.key:
-                return current_node
-            else:
+    def get_player_node_by_key(self, key) -> PlayerNode | None:
+        if not self._tail and not self._head:
+            return None
+        if self._head:
+            current_node = self._head
+            while current_node:
+                if key == current_node.key:
+                    return current_node
                 current_node = current_node.next_node
-        return None
+        else:
+            current_node = self._tail
+            while current_node:
+                if key == current_node.key:
+                    return current_node
+                current_node = current_node.prev_node
+
+    def __len__(self) -> int:
+        if not self._head and not self._tail:
+            return 0
+
+        count = 0
+        if self._head:
+            current_node = self._head
+            while current_node:
+                count += 1
+                current_node = current_node.next_node
+        elif self._tail:
+            current_node = self._tail
+            while current_node:
+                count += 1
+                current_node = current_node.prev_node
+        return count
 
     def _is_empty(self) -> bool:
         return self._head is None and self._tail is None
