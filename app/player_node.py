@@ -1,8 +1,5 @@
-from player import Player
-
-
 class PlayerNode:
-    def __init__(self, player : Player):
+    def __init__(self, player):
         self._player = player
         self._next_node = None
         self._prev_node = None
@@ -16,7 +13,7 @@ class PlayerNode:
         return self._next_node
 
     @next_node.setter
-    def next_node(self, player : Player):
+    def next_node(self, player):
         self._next_node = player
 
     @property
@@ -24,7 +21,7 @@ class PlayerNode:
         return self._prev_node
 
     @prev_node.setter
-    def prev_node(self, player: Player):
+    def prev_node(self, player):
         self._prev_node = player
 
     @property
