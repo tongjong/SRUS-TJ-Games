@@ -17,7 +17,7 @@ class PlayerList:
     def tail(self):
         return self._tail
 
-    def add_at_head(self, player_node) -> None:
+    def add_at_head(self, player_node : PlayerNode) -> None:
         if self._is_empty():
             self._head = player_node
         else:
@@ -28,7 +28,7 @@ class PlayerList:
                 self._tail = self._head
             self._head = player_node
 
-    def add_at_tail(self, player_node) -> None:
+    def add_at_tail(self, player_node : PlayerNode) -> None:
         if self._is_empty():
             self._tail = player_node
         else:
