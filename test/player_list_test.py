@@ -25,5 +25,8 @@ class TestPlayerList(unittest.TestCase):
         self.player_list.add_at_head(self.player_node_2)
 
         self.assertEqual(self.player_list.head, self.player_node_2)
+        self.assertEqual(self.player_list.tail, self.player_node_1)
         self.assertEqual(self.player_node_2.next_node, self.player_node_1)
         self.assertEqual(self.player_node_1.prev_node, self.player_node_2)
+
+
