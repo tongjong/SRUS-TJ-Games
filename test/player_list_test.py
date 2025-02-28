@@ -162,6 +162,31 @@ class TestPlayerList(unittest.TestCase):
         self.assertEqual(self.player_list.head.next_node, self.player_node_1)
         self.assertEqual(self.player_list.tail.prev_node, self.player_node_3)
 
+    def test_display_when_forward_is_true(self):
+        self.player_list.add_at_head(self.player_node_1)
+        self.player_list.add_at_head(self.player_node_2)
+        self.player_list.add_at_head(self.player_node_3)
+        player_nodes = self.player_list.display()
+
+        self.assertEqual(len(player_nodes), 3)
+        self.assertTrue(player_nodes[0].__contains__("Player Name"))
+        self.assertTrue(player_nodes[0].__contains__("3"))
+        self.assertTrue(player_nodes[1].__contains__("2"))
+        self.assertTrue(player_nodes[2].__contains__("John"))
+
+    def test_display_when_forward_is_false(self):
+        self.player_list.add_at_tail(self.player_node_1)
+        self.player_list.add_at_tail(self.player_node_2)
+        self.player_list.add_at_tail(self.player_node_3)
+        player_nodes = self.player_list.display(forward=False)
+
+        self.assertEqual(len(player_nodes), 3)
+        self.assertTrue(player_nodes[0].__contains__("Unique Id"))
+        self.assertTrue(player_nodes[0].__contains__("3"))
+        self.assertTrue(player_nodes[1].__contains__("2"))
+        self.assertTrue(player_nodes[2].__contains__("John"))
+
+
 
 
 
