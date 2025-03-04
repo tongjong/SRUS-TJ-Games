@@ -1,7 +1,6 @@
 from typing import List
 from app.player_node import PlayerNode
 
-
 class EmptyListException(Exception):
     pass
 
@@ -147,8 +146,3 @@ class PlayerList:
             players.append(str(current_node.player))
             current_node = current_node.prev_node
         return players
-
-
-
-
-
