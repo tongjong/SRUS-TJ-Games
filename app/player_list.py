@@ -73,7 +73,7 @@ class PlayerList:
             self._tail = new_tail
 
     def remove_node_by_key(self, key: str) -> None:
-        player_node = self._get_player_node_by_key(key)
+        player_node = self.get_player_node_by_key(key)
         if self._head is player_node:
             self.remove_at_head()
         elif self._tail is player_node:
@@ -98,7 +98,7 @@ class PlayerList:
                 current_node = current_node.prev_node
         return player_nodes
 
-    def _get_player_node_by_key(self, key) -> PlayerNode | None:
+    def get_player_node_by_key(self, key) -> PlayerNode | None:
         current_node = self._head
         while current_node:
             if key == current_node.key:
@@ -106,6 +106,14 @@ class PlayerList:
             else:
                 current_node = current_node.next_node
         return None
+
+    def __len__(self) -> int:
+        count = 0
+        current_node = self._head
+        while current_node:
+            count += 1
+            current_node = current_node.next_node
+        return count
 
     def _is_empty(self) -> bool:
         return self._head is None and self._tail is None
