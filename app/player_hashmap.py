@@ -21,8 +21,11 @@ class PlayerHashMap:
         for index, player_list in enumerate(self._hash_table):
             # check if player list has any node
             if player_list.head or player_list.tail:
-                details = player_list.display()
-                all_players.append(f"{index}: {details}")
+                info_list = player_list.display()
+                players_of_each_play_list = f"{index}: "
+                for info in info_list:
+                    players_of_each_play_list += info + " | "
+                all_players.append(players_of_each_play_list)
 
         return all_players
 
@@ -58,7 +61,16 @@ if __name__ == "__main__":
     hashmap = PlayerHashMap()
     hashmap["1"] = "john"
     hashmap["2"] = "joe"
-    hashmap["2"] = "mary"
-    del hashmap["1"]
-    print(hashmap.display())
-    len(hashmap)
+    hashmap["3"] = "joe"
+    hashmap["4"] = "joe"
+    hashmap["5"] = "joe"
+    hashmap["6"] = "joe"
+    hashmap["10"] = "mary"
+    hashmap["11"] = "mary"
+    hashmap["12"] = "mary"
+    hashmap["13"] = "mary"
+    hashmap["14"] = "mary"
+    hashmap["15"] = "mary"
+    for each in hashmap.display():
+        print(each)
+    print(len(hashmap))

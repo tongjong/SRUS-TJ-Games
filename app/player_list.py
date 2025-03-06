@@ -1,7 +1,6 @@
 from typing import List
 from app.player_node import PlayerNode
 
-
 class EmptyListException(Exception):
     pass
 
@@ -86,18 +85,15 @@ class PlayerList:
             node_after.prev_node = node_before
 
     def display(self, forward : bool= True) -> List[str]:
-        players = []
-        if forward:
-            current_node = self._head
-            while current_node:
-                players.append(str(current_node.player))
-                current_node = current_node.next_node
+        if not self._head and forward:
+            return [str(self.tail.player)]
+        elif not self._tail and not forward:
+            return [str(self.head.player)]
         else:
-            current_node = self._tail
-            while current_node:
-                players.append(str(current_node.player))
-                current_node = current_node.prev_node
-        return players
+            if forward:
+                return self._display_forward()
+            else:
+                return self._display_backward()
 
     def get_player_node_by_key(self, key) -> PlayerNode | None:
         if not self._tail and not self._head:
@@ -116,26 +112,50 @@ class PlayerList:
                 current_node = current_node.prev_node
 
     def __len__(self) -> int:
+        if not self._head and not self._tail:
+            return 0
+
         count = 0
-        current_node = self._head
-        while current_node:
-            count += 1
-            current_node = current_node.next_node
+        if self._head:
+            current_node = self._head
+            while current_node:
+                count += 1
+                current_node = current_node.next_node
+        elif self._tail:
+            current_node = self._tail
+            while current_node:
+                count += 1
+                current_node = current_node.prev_node
         return count
 
     def _is_empty(self) -> bool:
         return self._head is None and self._tail is None
+
+    def _display_forward(self) -> List[str]:
+        players = []
+        current_node = self._head
+        while current_node:
+            players.append(str(current_node.player))
+            current_node = current_node.next_node
+        return players
+
+    def _display_backward(self) -> List[str]:
+        players = []
+        current_node = self._tail
+        while current_node:
+            players.append(str(current_node.player))
+            current_node = current_node.prev_node
+        return players
 
 
 if __name__ == '__main__':
     from player import Player
     from player_node import PlayerNode
     player_1 =Player("1", "john")
-    player_2 = Player("2", "joe")
     play_list = PlayerList()
     play_list.add_at_tail(PlayerNode(player_1))
-    play_list.add_at_tail(PlayerNode(player_2))
     print(play_list.display())
+    print(len(play_list))
 
 
 
