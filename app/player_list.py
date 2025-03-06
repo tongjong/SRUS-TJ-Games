@@ -119,9 +119,15 @@ class PlayerList:
         return self._head is None and self._tail is None
 
 
-
-
-
+if __name__ == '__main__':
+    from player import Player
+    from player_node import PlayerNode
+    player_1 =Player("1", "john")
+    player_2 = Player("2", "joe")
+    play_list = PlayerList()
+    play_list.add_at_head(PlayerNode(player_2))
+    play_list.add_at_head(PlayerNode(player_1))
+    print(play_list.display())
 
 
 

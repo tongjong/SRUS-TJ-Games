@@ -34,7 +34,10 @@ class Player:
         return self._pearson_hash(self._uid)
 
     def __str__(self):
-        return f'Unique Id: {self._uid}, Player Name: {self._name}'
+        return f'Unique Id: {self.uid}, Player Name: {self.name}'
+
+    def __eq__(self, player: 'Player') -> bool:
+        return self.uid == player.uid
 
     def _pearson_hash(self, key) -> int:
         byte_values = bytes(key, encoding='utf8')
