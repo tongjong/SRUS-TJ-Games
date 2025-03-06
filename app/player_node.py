@@ -32,4 +32,4 @@ class PlayerNode:
         return self._player.uid
 
     def __str__(self):
-        return f"player: {self._player},next_node: {self._next_node},prev_node: {self._prev_node}"
+        return f"player: {self._player} || next node: {self._next_node} || prev node: {self._prev_node}"

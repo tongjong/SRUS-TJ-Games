@@ -1,3 +1,4 @@
+from typing import List
 from app.player_node import PlayerNode
 
 
@@ -84,28 +85,35 @@ class PlayerList:
             node_before.next_node = node_after
             node_after.prev_node = node_before
 
-    def display(self, forward : bool= True) -> list[str]:
-        player_nodes = []
+    def display(self, forward : bool= True) -> List[str]:
+        players = []
         if forward:
             current_node = self._head
             while current_node:
-                player_nodes.append(str(current_node.player))
+                players.append(str(current_node.player))
                 current_node = current_node.next_node
         else:
             current_node = self._tail
             while current_node:
-                player_nodes.append(str(current_node.player))
+                players.append(str(current_node.player))
                 current_node = current_node.prev_node
-        return player_nodes
+        return players
 
     def get_player_node_by_key(self, key) -> PlayerNode | None:
-        current_node = self._head
-        while current_node:
-            if key == current_node.key:
-                return current_node
-            else:
+        if not self._tail and not self._head:
+            return None
+        if self._head:
+            current_node = self._head
+            while current_node:
+                if key == current_node.key:
+                    return current_node
                 current_node = current_node.next_node
-        return None
+        else:
+            current_node = self._tail
+            while current_node:
+                if key == current_node.key:
+                    return current_node
+                current_node = current_node.prev_node
 
     def __len__(self) -> int:
         count = 0
@@ -125,8 +133,8 @@ if __name__ == '__main__':
     player_1 =Player("1", "john")
     player_2 = Player("2", "joe")
     play_list = PlayerList()
-    play_list.add_at_head(PlayerNode(player_2))
-    play_list.add_at_head(PlayerNode(player_1))
+    play_list.add_at_tail(PlayerNode(player_1))
+    play_list.add_at_tail(PlayerNode(player_2))
     print(play_list.display())
 
 
