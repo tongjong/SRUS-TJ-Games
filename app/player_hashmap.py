@@ -15,6 +15,20 @@ class PlayerHashMap:
         else:
             return Player.hash(key) % self._size
 
+    def display(self) -> List[str]:
+        all_players = []
+
+        for index, player_list in enumerate(self._hash_table):
+            # check if player list has any node
+            if player_list.head or player_list.tail:
+                info_list = player_list.display()
+                players_of_each_play_list = f"{index}: "
+                for info in info_list:
+                    players_of_each_play_list += info + " | "
+                all_players.append(players_of_each_play_list)
+
+        return all_players
+
     def __getitem__(self, uid: str) -> Tuple[int, Player] | None:
         index = self.get_index(uid)
         player_node = self._hash_table[index].get_player_node_by_key(uid)
@@ -42,3 +56,20 @@ class PlayerHashMap:
     def __len__(self) -> int:
         return sum(len(player_list) for player_list in self._hash_table)
 
+if __name__ == "__main__":
+    hashmap = PlayerHashMap()
+    hashmap["1"] = "john"
+    hashmap["2"] = "joe"
+    hashmap["3"] = "joe"
+    hashmap["4"] = "joe"
+    hashmap["5"] = "joe"
+    hashmap["6"] = "joe"
+    hashmap["10"] = "mary"
+    hashmap["11"] = "mary"
+    hashmap["12"] = "mary"
+    hashmap["13"] = "mary"
+    hashmap["14"] = "mary"
+    hashmap["15"] = "mary"
+    for each in hashmap.display():
+        print(each)
+    print(len(hashmap))

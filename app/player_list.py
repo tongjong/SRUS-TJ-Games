@@ -146,3 +146,12 @@ class PlayerList:
             players.append(str(current_node.player))
             current_node = current_node.prev_node
         return players
+
+if __name__ == '__main__':
+    from player import Player
+    from player_node import PlayerNode
+    player_1 =Player("1", "john")
+    play_list = PlayerList()
+    play_list.add_at_tail(PlayerNode(player_1))
+    print(play_list.display())
+    print(len(play_list))
