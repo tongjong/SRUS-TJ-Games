@@ -1,13 +1,13 @@
 from app.player import Player
 from app.player_list import PlayerList
 from app.player_node import PlayerNode
-from typing import Tuple
+from typing import Tuple, List
 
 
 class PlayerHashMap:
     def __init__(self, size:int =10):
         self._size = size
-        self.hash_table: list[PlayerList] = [PlayerList() for _ in range(self._size)]
+        self.hash_table: List[PlayerList] = [PlayerList() for _ in range(self._size)]
 
     def get_index(self, key: str | Player) -> int:
         if isinstance(key, Player):
@@ -15,7 +15,7 @@ class PlayerHashMap:
         else:
             return Player.hash(key) % self._size
 
-    def display(self) -> list[str]:
+    def display(self) -> List[str]:
         all_players = []
 
         for index, player_list in enumerate(self.hash_table):
@@ -24,7 +24,7 @@ class PlayerHashMap:
                 player_list_details = player_list.display()
                 each_player_list= f"{index + 1}: "
                 for player_detail in player_list_details:
-                    each_player_list += f"{player_detail} | "
+                    each_player_list += player_detail + " | "
 
                 all_players.append(each_player_list)
 
@@ -64,3 +64,5 @@ if __name__ == "__main__":
     hashmap["1"] = "john"
     hashmap["2"] = "jane"
     print(hashmap.display())
+    print(hashmap["2"])
+    print(hashmap["1"])
